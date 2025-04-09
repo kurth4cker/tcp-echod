@@ -5,11 +5,13 @@ Simple TCP echo server. Uses socket interface.
 
 ## Building
 
-  # build
-  go build
+**echod** uses go build driver.
 
-  # run tests
-  go test ./...
+    # build
+    go build
+
+    # run tests
+    go test ./...
 
 
 ## Copying
