@@ -1,11 +1,11 @@
-# echod - TCP Echo Server
+# tcp-echod - TCP Echo Server
 
 Simple TCP echo server. Uses socket interface.
 
 
 ## Building
 
-**echod** uses go build driver.
+**tcp-echod** uses go build driver.
 
     # build
     go build
@@ -16,5 +16,5 @@ Simple TCP echo server. Uses socket interface.
 
 ## Copying
 
-**echod** is licensed under the terms of GPL-3.0-or-later. See file COPYING for
+**tcp-echod** is licensed under the terms of GPL-3.0-or-later. See file COPYING for
 details.
