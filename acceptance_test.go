@@ -9,9 +9,14 @@ import (
 )
 
 func TestEcho(t *testing.T) {
-	compile(t)
-	runServer(t)
+	setup(t)
 	t.Fatal("NOT COMPLETE YET")
+}
+
+func setup(tb testing.TB) {
+	tb.Helper()
+	compile(tb)
+	runServer(tb)
 }
 
 func compile(tb testing.TB) {
