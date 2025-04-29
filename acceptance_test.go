@@ -4,12 +4,22 @@
 package main_test
 
 import (
+	"net"
 	"os/exec"
 	"testing"
 )
 
 func TestEcho(t *testing.T) {
 	setup(t)
+
+	t.Run("should be connectable via tcp4", func(t *testing.T) {
+		conn, err := net.Dial("tcp4", "127.0.0.1:6767")
+		if err != nil {
+			t.Fatalf("could not connect: %s", err);
+		}
+		defer conn.Close()
+	})
+
 	t.Fatal("NOT COMPLETE YET")
 }
 
