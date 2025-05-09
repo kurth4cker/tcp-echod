@@ -1,3 +1,3 @@
-module github.com/kurth4cker/echod
+module github.com/kurth4cker/tcp-echod
 
 go 1.23.6
