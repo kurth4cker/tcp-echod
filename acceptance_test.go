@@ -4,6 +4,7 @@
 package main_test
 
 import (
+	"bytes"
 	"net"
 	"os/exec"
 	"testing"
@@ -13,14 +14,51 @@ func TestEcho(t *testing.T) {
 	setup(t)
 
 	t.Run("should be connectable via tcp4", func(t *testing.T) {
-		conn, err := net.Dial("tcp4", "127.0.0.1:6767")
+		conn, err := net.Dial("tcp4", ":6767")
 		if err != nil {
-			t.Fatalf("could not connect: %s", err);
+			t.Error(err);
+		} else {
+			defer conn.Close()
 		}
-		defer conn.Close()
 	})
 
-	t.Fatal("NOT COMPLETE YET")
+	t.Run("should accept data", func(t *testing.T) {
+		conn, err := net.DialTCP("tcp", nil, &net.TCPAddr{
+			Port: 6767,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer conn.Close()
+
+		data := []byte("sample data")
+		_, err = conn.Write(data)
+
+		if err != nil {
+			t.Errorf("could not write data")
+		}
+	})
+
+	t.Run("should write back", func(t *testing.T) {
+		conn, err := net.DialTCP("tcp", nil, &net.TCPAddr{
+			Port: 6767,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer conn.Close()
+
+		data := []byte("sample data")
+		conn.Write(data)
+
+		got := make([]byte, 0, len(data))
+		conn.Read(got)
+		want := data
+
+		if !bytes.Equal(got, want) {
+			t.Errorf("got %v, want %v", got, want)
+		}
+	})
 }
 
 func setup(tb testing.TB) {
