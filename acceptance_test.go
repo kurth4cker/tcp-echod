@@ -11,7 +11,6 @@ import (
 )
 
 func TestEcho(t *testing.T) {
-	t.SkipNow()
 	setup(t)
 
 	t.Run("should be connectable via tcp4", func(t *testing.T) {
