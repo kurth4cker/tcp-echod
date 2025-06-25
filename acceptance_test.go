@@ -69,7 +69,7 @@ func setup(tb testing.TB) {
 
 func compile(tb testing.TB) {
 	tb.Helper()
-	err := exec.Command("go", "build", "-o", "echod").Run()
+	err := exec.Command("go", "build", "-o", "tcp-echod").Run()
 	if err != nil {
 		tb.Fatal("failed to build echod")
 	}
@@ -80,7 +80,7 @@ func compile(tb testing.TB) {
 
 func runServer(tb testing.TB) {
 	tb.Helper()
-	cmd := exec.Command("./echod", "127.0.0.1:2929")
+	cmd := exec.Command("./tcp-echod", "127.0.0.1:2929")
 	if err := cmd.Start(); err != nil {
 		tb.Fatal("cannot start echod:", err)
 	}
